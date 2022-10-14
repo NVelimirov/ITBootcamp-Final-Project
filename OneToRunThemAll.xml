@@ -1,0 +1,18 @@
+
+<suite name = "OneToRunThemAll">
+
+    <test name= "AllClasses">
+
+    <classes>
+
+        <class name = "tests.TestConfluxHomePage"/>
+        <class name = "tests.TestAccountCreation"/>
+        <class name = "tests.TestLogInLogOut"/>
+        <class name = "tests.TestSearchBar"/>
+        <class name = "tests.TestWishlistPage"/>
+
+    </classes>
+
+</test>
+
+        </suite>
