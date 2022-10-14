@@ -56,13 +56,13 @@ public class AccountCreationPage {
     @FindBy(xpath = "//div[@class='text-danger']")
     private WebElement message_invalidUserCredentials;
 
-    private FileInputStream inputStream = new FileInputStream("C:\\Users\\DIGESTA\\Desktop\\IT Bootcamp Zavrsni Projekat\\src\\utils\\ListOfInvalidUserCredentials.xlsx");
+    private FileInputStream inputStream = new FileInputStream("src\\utils\\ListOfInvalidUserCredentials.xlsx");
 
     private XSSFWorkbook workBook = new XSSFWorkbook(inputStream);
 
     private XSSFSheet sheet =workBook.getSheet("Sheet1");
 
-    private int rowCount=sheet.getLastRowNum()-sheet.getFirstRowNum();
+    private int rowCount = sheet.getLastRowNum() - sheet.getFirstRowNum();
 //endregion
     public AccountCreationPage(WebDriver webDriver, Actions actions) throws IOException {
         this.webDriver = webDriver;

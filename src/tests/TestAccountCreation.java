@@ -90,7 +90,7 @@ public class TestAccountCreation {
         accountCreationPage.setConfirmPassword(confirmPassword);
         accountCreationPage.confirmPrivacyPolicy();
         accountCreationPage.finishAccountCreation();
-        Assert.assertEquals(true, accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
+        Assert.assertTrue(accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
     }
     @Test
     public void validUserCredentialsWithoutAcceptingPrivacyPolicy(){
@@ -103,7 +103,7 @@ public class TestAccountCreation {
         accountCreationPage.setInputPassword("1234");
         accountCreationPage.setConfirmPassword("1234");
         accountCreationPage.finishAccountCreation();
-        Assert.assertEquals(true, accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
+        Assert.assertTrue(accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
     }
 //endregion
     @Test (enabled = false)
