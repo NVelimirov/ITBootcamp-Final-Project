@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class WishlistPage {
@@ -15,10 +16,10 @@ public class WishlistPage {
 
     private Actions actions;
 
-    @FindBy(xpath = "//*[@id=\"products-6349569e652ce-tab-1\"]/div/div[1]/div/div[1]/div/div[2]/div[6]/div/div[2]/a")
+    @FindBy(xpath = "//a[@class='btn btn-wishlist']")
     private WebElement toWishlistFromFirstLatestProduct;
 
-    @FindBy(xpath = "//*[@id=\"products-6349569e652ce-tab-1\"]/div/div[1]/div/div[1]")
+    @FindBy(xpath = "//div[@class='product-layout swiper-slide has-extra-button swiper-slide-visible swiper-slide-active']")
     private WebElement latestProductsFirstItem;
 
     @FindBy(xpath = "//a[@href='https://conflux.rs/index.php?route=account/wishlist']")
@@ -43,8 +44,8 @@ public class WishlistPage {
     }
 
     public void addToWishlistFromLatestProducts(){
-        actions.moveToElement(latestProductsFirstItem).perform();
-        actions.moveToElement(toWishlistFromFirstLatestProduct).click().perform();
+            actions.moveToElement(latestProductsFirstItem).perform();
+            actions.moveToElement(toWishlistFromFirstLatestProduct).click().perform();
     }
 
     public void toWishlistPage(){
