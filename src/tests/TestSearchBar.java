@@ -51,7 +51,7 @@ public class TestSearchBar {
         searchPageConflux.inputIntoSearchBar(boardGame);
         Assert.assertEquals(searchPageConflux.checkIfOnSearchPage(), Page_TitlesTextsAndMessages.SEARCH_PAGE_TEXT.getAbsolutePath(), "Text should match");
         searchPageConflux.moveToProductsGrid();
-        Assert.assertEquals(searchPageConflux.checkNumberOfSearchedItemsThatMatchKeywords(boardGame), expectedNumberOfDisplayedItems, "Numbers should match");
+        Assert.assertEquals(searchPageConflux.checkNumberOfSearchedItemsThatMatchKeywords(boardGame), expectedNumberOfDisplayedItems, "Numbers of displayed items should match");
     }
 
     @Test (dependsOnMethods = "testSearchBar", enabled = false)

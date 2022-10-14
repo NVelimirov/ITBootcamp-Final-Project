@@ -69,6 +69,6 @@ public class TestConfluxHomePage {
 //endregion
     @AfterTest
     public void closeWebDriver(){
-        webDriver.close();
+        webDriver.quit();
     }
 }
