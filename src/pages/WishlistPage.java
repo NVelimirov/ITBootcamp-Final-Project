@@ -1,0 +1,81 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
+
+public class WishlistPage {
+
+    private WebDriver webDriver;
+
+    private Actions actions;
+
+    @FindBy(xpath = "//*[@id=\"products-6349569e652ce-tab-1\"]/div/div[1]/div/div[1]/div/div[2]/div[6]/div/div[2]/a")
+    private WebElement toWishlistFromFirstLatestProduct;
+
+    @FindBy(xpath = "//*[@id=\"products-6349569e652ce-tab-1\"]/div/div[1]/div/div[1]")
+    private WebElement latestProductsFirstItem;
+
+    @FindBy(xpath = "//a[@href='https://conflux.rs/index.php?route=account/wishlist']")
+    private WebElement wishlistPageBtn;
+
+    @FindBy(xpath = "//*[@id=\"content\"]/h1")
+    private WebElement wishlistTitlePage;
+
+    @FindBy(xpath = "//div[10]//div[1]//div[2]//div[6]//div[1]//div[2]//a[1]")
+    private WebElement toWishlistFromBoardgames;
+
+    @FindBy(xpath = "//tbody/tr[1]/td[6]/a[1]/i[1]")
+    private WebElement removeOneFromBoardgames;
+
+    @FindBy(xpath = "//div[@class='product-layout swiper-slide swiper-slide-visible swiper-slide-active']//a[@class='btn btn-wishlist']")
+    private WebElement addRecentlyViewedItem;
+
+    public WishlistPage(WebDriver webDriver, Actions actions){
+        this.webDriver = webDriver;
+        this.actions = actions;
+        PageFactory.initElements(this.webDriver, this);
+    }
+
+    public void addToWishlistFromLatestProducts(){
+        actions.moveToElement(latestProductsFirstItem).perform();
+        actions.moveToElement(toWishlistFromFirstLatestProduct).click().perform();
+    }
+
+    public void toWishlistPage(){
+        actions.moveToElement(wishlistPageBtn).click().perform();
+    }
+
+    public String checkIfOnWishlistPage(){
+        return wishlistTitlePage.getText();
+    }
+
+    public void addToWishlistFromBoardgames(){
+        actions.moveToElement(toWishlistFromBoardgames).click().perform();
+    }
+
+    public int checkNumberOfWishlistItems(){
+        int numberOfItems = 0;
+        WebElement table_Wishlist = webDriver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/table"));
+        List<WebElement> itemi = table_Wishlist.findElements(By.tagName("tr"));
+        for (WebElement i : itemi){
+            numberOfItems++;
+        }
+        return numberOfItems-1;
+    }
+
+    public void removeOneItemFromWishlist(){
+        actions.moveToElement(removeOneFromBoardgames).click().perform();
+    }
+
+    public void addFromRecentlyViewedList(){
+        actions.moveToElement(addRecentlyViewedItem).click().perform();
+        webDriver.navigate().refresh();
+    }
+
+}
