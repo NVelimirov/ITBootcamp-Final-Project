@@ -24,14 +24,14 @@ public class WishlistPage {
     @FindBy(xpath = "//a[@href='https://conflux.rs/index.php?route=account/wishlist']")
     private WebElement wishlistPageBtn;
 
-    @FindBy(xpath = "//*[@id=\"content\"]/h1")
+    @FindBy(css = ".title.page-title")
     private WebElement wishlistTitlePage;
 
     @FindBy(css = ".btn.btn-wishlist")
     private WebElement toWishlistButton;
 
-    @FindBy(xpath = "//tbody/tr[1]/td[6]/a[1]/i[1]")
-    private WebElement removeOneFromBoardgames;
+    @FindBy(css = ".btn.btn-danger.btn-remove")
+    private WebElement removeBtn;
 
     @FindBy(xpath = "//div[@class='product-layout swiper-slide swiper-slide-visible swiper-slide-active']//a[@class='btn btn-wishlist']")
     private WebElement addRecentlyViewedItem;
@@ -43,13 +43,25 @@ public class WishlistPage {
     }
 
     public void addToWishlistFromLatestProducts(){
+        try {
             actions.moveToElement(latestProductsFirstItem).perform();
             actions.moveToElement(toWishlistFromFirstLatestProduct).click().perform();
+        } catch (AssertionError exception){
+            System.out.println(exception.getMessage() + exception.getCause());
+        } catch (Exception exception){
+            System.out.println(exception.getMessage() + exception.getCause());
+        }
     }
 
     public void toWishlistPage(){
+    try {
         webDriver.navigate().refresh();
         actions.moveToElement(wishlistPageBtn).click().perform();
+    } catch (AssertionError exception){
+        System.out.println(exception.getMessage() + exception.getCause());
+    } catch (Exception exception){
+        System.out.println(exception.getMessage() + exception.getCause());
+    }
     }
 
     public String checkIfOnWishlistPage(){
@@ -60,18 +72,18 @@ public class WishlistPage {
         actions.moveToElement(toWishlistButton).click().perform();
     }
 
-    public int checkNumberOfWishlistItems(){
+    public int checkNumberOfWishlistItems() {
         int numberOfItems = 0;
-        WebElement table_Wishlist = webDriver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/table"));
+        WebElement table_Wishlist = webDriver.findElement(By.id("account-wishlist"));
         List<WebElement> itemi = table_Wishlist.findElements(By.tagName("tr"));
-        for (WebElement i : itemi){
+        for (WebElement i : itemi) {
             numberOfItems++;
         }
-
+        return numberOfItems;
     }
 
     public void removeOneItemFromWishlist(){
-        actions.moveToElement(removeOneFromBoardgames).click().perform();
+        actions.moveToElement(removeBtn).click().perform();
     }
 
     public void addFromRecentlyViewedList(){
