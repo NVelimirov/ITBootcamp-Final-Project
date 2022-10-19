@@ -46,9 +46,7 @@ public class WishlistPage {
         try {
             actions.moveToElement(latestProductsFirstItem).perform();
             actions.moveToElement(toWishlistFromFirstLatestProduct).click().perform();
-        } catch (AssertionError exception){
-            System.out.println(exception.getMessage() + exception.getCause());
-        } catch (Exception exception){
+        } catch (AssertionError | Exception exception){
             System.out.println(exception.getMessage() + exception.getCause());
         }
     }
@@ -57,9 +55,7 @@ public class WishlistPage {
     try {
         webDriver.navigate().refresh();
         actions.moveToElement(wishlistPageBtn).click().perform();
-    } catch (AssertionError exception){
-        System.out.println(exception.getMessage() + exception.getCause());
-    } catch (Exception exception){
+    } catch (AssertionError | Exception exception){
         System.out.println(exception.getMessage() + exception.getCause());
     }
     }
