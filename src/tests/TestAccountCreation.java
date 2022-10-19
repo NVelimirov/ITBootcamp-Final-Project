@@ -11,7 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.AccountCreationPage;
 import pages.LogInPageAndLogOut;
-import pages.ReadFromExcel;
+import utils.ReadFromExcel;
 import utils.Page_TitlesTextsAndMessages;
 
 import java.io.IOException;
