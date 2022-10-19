@@ -14,6 +14,7 @@ This is a test suite written in Java that is designed to automaticaly test [Conf
 - Search bar
 - Search results
 - Product filters
+- Sliders
 - Checkbox filters
 ## Technologies and Key Concepts
 ***
