@@ -63,6 +63,9 @@ public class TestWishlistPage {
         wishlistPage.addToWishlistFromBoardgames();
         wishlistPage.toWishlistPage();
         Assert.assertEquals(wishlistPage.checkNumberOfWishlistItems(), 2, "Numbers should match");
+        //u slucaju da je u LatestProducts listu dodat artikal koji potpada i pod Boardgames, ovaj assert najverovatnije nece proci, a moze da poremeti ishod i ostalih asertova
+        //trebalo bi zbog toga korigovati asertove
+        //ili izbaciti dodavanje u Wishlist iz Latest Products
     }
 
     @Test (priority = 4)

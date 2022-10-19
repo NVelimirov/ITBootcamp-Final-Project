@@ -11,7 +11,6 @@ public class ReadFromExcel {
     private XSSFWorkbook workBook;
     private XSSFSheet sheet;
     private String sheetName = "Sheet1";
-//    private int rowCount = sheet.getLastRowNum()-sheet.getFirstRowNum();
 
     public String getSheetName() {
         return sheetName;

@@ -7,7 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class WishlistPage {
@@ -28,8 +27,8 @@ public class WishlistPage {
     @FindBy(xpath = "//*[@id=\"content\"]/h1")
     private WebElement wishlistTitlePage;
 
-    @FindBy(xpath = "//div[10]//div[1]//div[2]//div[6]//div[1]//div[2]//a[1]")
-    private WebElement toWishlistFromBoardgames;
+    @FindBy(xpath = "//a[@class='btn btn-wishlist']")
+    private WebElement toWishlistButton;
 
     @FindBy(xpath = "//tbody/tr[1]/td[6]/a[1]/i[1]")
     private WebElement removeOneFromBoardgames;
@@ -58,7 +57,7 @@ public class WishlistPage {
     }
 
     public void addToWishlistFromBoardgames(){
-        actions.moveToElement(toWishlistFromBoardgames).click().perform();
+        actions.moveToElement(toWishlistButton).click().perform();
     }
 
     public int checkNumberOfWishlistItems(){
