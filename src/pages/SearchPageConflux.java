@@ -57,11 +57,10 @@ public class SearchPageConflux {
         int numberOfDisplayedItems = 0;
         WebElement searchProductsInStockTable = webDriver.findElement(By.xpath("//div[@class='main-products product-grid']"));
         List<WebElement> searchedDisplayedItemsInStock = searchProductsInStockTable.findElements(By.xpath("//div[@class='product-layout  has-extra-button']"));
-        for (WebElement i : searchedDisplayedItemsInStock){
-            if (i.getText().contains(searchInputText)) {
-                numberOfDisplayedItems++;
-            }
-        }
+        numberOfDisplayedItems += searchedDisplayedItemsInStock.stream()
+                .filter(item -> item.getText().contains(searchInputText))
+                .count();
+
         WebElement searchProductsOutOfStockTable = webDriver.findElement(By.xpath("//div[@class='main-products product-grid']"));
         List<WebElement> searchedDisplayedItemsOutOfStock = searchProductsOutOfStockTable.findElements(By.xpath("//div[@class='product-layout  has-extra-button']"));
         for (WebElement i : searchedDisplayedItemsOutOfStock){
