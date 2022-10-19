@@ -73,21 +73,27 @@ public class AccountCreationPage {
         continueToAccounCreationPage.click();
     }
     public void setInputFirstName(String input){
+        inputFirstName.clear();
         inputFirstName.sendKeys(input);
     }
     public void setInputLastName(String input){
+        inputLastName.clear();
         inputLastName.sendKeys(input);
     }
     public void setInputEmail(String input){
+        inputEmail.clear();
         inputEmail.sendKeys(input);
     }
     public void setInputPhoneNumber(String input){
+        inputPhoneNumber.clear();
         inputPhoneNumber.sendKeys(input);
     }
     public void setInputPassword(String input){
+        inputPassword.clear();
         inputPassword.sendKeys(input);
     }
     public void setConfirmPassword(String input){
+        confirmPassword.clear();
         confirmPassword.sendKeys(input);
     }
     public void confirmPrivacyPolicy(){

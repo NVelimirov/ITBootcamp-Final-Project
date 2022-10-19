@@ -11,7 +11,8 @@ public enum Page_TitlesTextsAndMessages {
     LOG_IN_WARNING_NUMBER_OF_ATTEMPTS("Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour."),
     HOME_PAGE_LANGUAGE_SERBIAN("SRPSKI"),
     HOME_PAGE_LANGUAGE_ENGLISH("ENGLISH"),
-    FACEBOOK_PAGE_TITLE("Drustvene igre Prodaja Prodavnica Klub drustvenih igara");
+    FACEBOOK_PAGE_TITLE("Drustvene igre Prodaja Prodavnica Klub drustvenih igara"),
+    EXCEL_TABLE_PATH("src\\utils\\ListOfInvalidUserCredentials.xlsx");
     private String absolutePath;
     private Page_TitlesTextsAndMessages(String absolutePath) {
         this.absolutePath = absolutePath;
