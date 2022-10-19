@@ -67,7 +67,7 @@ public class WishlistPage {
         for (WebElement i : itemi){
             numberOfItems++;
         }
-        return numberOfItems-1;//workaround
+
     }
 
     public void removeOneItemFromWishlist(){

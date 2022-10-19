@@ -57,6 +57,7 @@ public class SearchPageConflux {
         int numberOfDisplayedItems = 0;
         WebElement searchProductsInStockTable = webDriver.findElement(By.xpath("//div[@class='main-products product-grid']"));
         List<WebElement> searchedDisplayedItemsInStock = searchProductsInStockTable.findElements(By.xpath("//div[@class='product-layout  has-extra-button']"));
+
         numberOfDisplayedItems += searchedDisplayedItemsInStock.stream()
                 .filter(item -> item.getText().contains(searchInputText))
                 .count();
