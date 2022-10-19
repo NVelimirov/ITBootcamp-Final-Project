@@ -60,44 +60,41 @@ public class AccountCreationPage {
 
     private XSSFWorkbook workBook = new XSSFWorkbook(inputStream);
 
-    private XSSFSheet sheet =workBook.getSheet("Sheet1");
+    private XSSFSheet sheet = workBook.getSheet("Sheet1");
 
-    private int rowCount = sheet.getLastRowNum() - sheet.getFirstRowNum();
+    private int rowCount = sheet.getLastRowNum()-sheet.getFirstRowNum();
+
 //endregion
     public AccountCreationPage(WebDriver webDriver, Actions actions) throws IOException {
         this.webDriver = webDriver;
         this.actions = actions;
         PageFactory.initElements(this.webDriver, this);
     }
-
-    public void clickOn_Captcha_CheckBox(){
-        try {
-            new WebDriverWait(webDriver, 10).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[@title='reCAPTCHA']")));
-            new WebDriverWait(webDriver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='recaptcha-checkbox-border']")));
-        }catch (Exception e){
-            System.out.println("e: " + e.getMessage());
-        }
-    }
-
     public void continueToRegistration(){
         continueToAccounCreationPage.click();
     }
     public void setInputFirstName(String input){
+        inputFirstName.clear();
         inputFirstName.sendKeys(input);
     }
     public void setInputLastName(String input){
+        inputLastName.clear();
         inputLastName.sendKeys(input);
     }
     public void setInputEmail(String input){
+        inputEmail.clear();
         inputEmail.sendKeys(input);
     }
     public void setInputPhoneNumber(String input){
+        inputPhoneNumber.clear();
         inputPhoneNumber.sendKeys(input);
     }
     public void setInputPassword(String input){
+        inputPassword.clear();
         inputPassword.sendKeys(input);
     }
     public void setConfirmPassword(String input){
+        confirmPassword.clear();
         confirmPassword.sendKeys(input);
     }
     public void confirmPrivacyPolicy(){
@@ -106,28 +103,18 @@ public class AccountCreationPage {
     public void finishAccountCreation(){
         finishAccountCreationBtn.click();
     }
-
     public boolean getMessage_invalidUserCredentials(){
         return message_invalidUserCredentials.isDisplayed();
     }
-
-    public int counter(){
-        int counter = 1;
-        return counter+1;
-    }
-
     public FileInputStream getInputStream(){
         return this.inputStream;
     }
-
     public XSSFWorkbook getWorkBook(){
         return this.workBook;
     }
-
     public XSSFSheet getSheet(){
         return this.sheet;
     }
-
     public int getRowCount(){
         return this.rowCount;
     }

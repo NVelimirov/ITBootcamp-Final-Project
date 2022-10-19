@@ -41,7 +41,6 @@ public class TestSearchBar {
                 {"Fallout", 4},
                 {"Dark Souls", 2},
                 {"Waterdeep", 6},
-                {"", 12},
         };
     }
 //endregion

@@ -13,6 +13,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.AccountCreationPage;
 import pages.LogInPageAndLogOut;
+import pages.ReadFromExcel;
+import utils.Page_TitlesTextsAndMessages;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,6 +24,7 @@ public class TestAccountCreation {
     private WebDriver webDriver;
     private Actions actions;
     private AccountCreationPage accountCreationPage;
+    private ReadFromExcel readFromExcel;
 
  //region BeforeMethod
     private LogInPageAndLogOut logInPageAndLogOut;
@@ -33,6 +36,7 @@ public class TestAccountCreation {
         actions = new Actions(webDriver);
         accountCreationPage = new AccountCreationPage(webDriver, actions);
         logInPageAndLogOut = new LogInPageAndLogOut(webDriver, actions);
+        readFromExcel = new ReadFromExcel();
         webDriver.get("https://conflux.rs/");
         webDriver.manage().window().maximize();
     }
@@ -58,26 +62,44 @@ public class TestAccountCreation {
     }
 //endregion
 //region Tests
-    @Test (description = "variation of createAccountWithInvalidData, read from xml file")
-    public void invalidDataAcountCreation() throws IOException {
-        FileInputStream inputStream = accountCreationPage.getInputStream();
-        XSSFWorkbook workBook = accountCreationPage.getWorkBook();
-        XSSFSheet sheet = accountCreationPage.getSheet();
-        int rowCount=accountCreationPage.getRowCount();
-        for(int i=0;i<=rowCount;i++) {
-            logInPageAndLogOut.clickOnAccountPageBtn();
-            accountCreationPage.continueToRegistration();
-            accountCreationPage.setInputFirstName(sheet.getRow(i).getCell(0).getStringCellValue());
-            accountCreationPage.setInputLastName(sheet.getRow(i).getCell(1).getStringCellValue());
-            accountCreationPage.setInputEmail(sheet.getRow(i).getCell(2).getStringCellValue());
-            accountCreationPage.setInputPhoneNumber(sheet.getRow(i).getCell(3).getStringCellValue());
-            accountCreationPage.setInputPassword(sheet.getRow(i).getCell(4).getStringCellValue());
-            accountCreationPage.setConfirmPassword(sheet.getRow(i).getCell(5).getStringCellValue());
+    //stara verzija
+//    @Test (description = "variation of createAccountWithInvalidData, read from xml file")
+//    public void invalidDataAcountCreation() throws IOException {
+//        FileInputStream inputStream = accountCreationPage.getInputStream();
+//        XSSFWorkbook workBook = accountCreationPage.getWorkBook();
+//        XSSFSheet sheet = accountCreationPage.getSheet();
+//        int rowCount=accountCreationPage.getRowCount();
+//        for(int i=0;i<=rowCount;i++) {
+//            logInPageAndLogOut.clickOnAccountPageBtn();
+//            accountCreationPage.continueToRegistration();
+//            accountCreationPage.setInputFirstName(sheet.getRow(i).getCell(0).getStringCellValue());
+//            accountCreationPage.setInputLastName(sheet.getRow(i).getCell(1).getStringCellValue());
+//            accountCreationPage.setInputEmail(sheet.getRow(i).getCell(2).getStringCellValue());
+//            accountCreationPage.setInputPhoneNumber(sheet.getRow(i).getCell(3).getStringCellValue());
+//            accountCreationPage.setInputPassword(sheet.getRow(i).getCell(4).getStringCellValue());
+//            accountCreationPage.setConfirmPassword(sheet.getRow(i).getCell(5).getStringCellValue());
+//            accountCreationPage.confirmPrivacyPolicy();
+//            accountCreationPage.finishAccountCreation();
+//            Assert.assertEquals(true, accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
+//        }
+//    }
+@Test (description = "variation of createAccountWithInvalidData, read from xml file")
+    public void invalidDataAcountCreation(){
+        readFromExcel.readFromExcelTable(Page_TitlesTextsAndMessages.EXCEL_TABLE_PATH.getAbsolutePath());
+        logInPageAndLogOut.clickOnAccountPageBtn();
+        accountCreationPage.continueToRegistration();
+        for (int i = 0; i< readFromExcel.getRowCount(); i++) {
+            accountCreationPage.setInputFirstName(readFromExcel.getData(i, 0));
+            accountCreationPage.setInputLastName(readFromExcel.getData(i, 1));
+            accountCreationPage.setInputEmail(readFromExcel.getData(i, 2));
+            accountCreationPage.setInputPhoneNumber(readFromExcel.getData(i, 3));
+            accountCreationPage.setInputPassword(readFromExcel.getData(i, 4));
+            accountCreationPage.setConfirmPassword(readFromExcel.getData(i, 5));
             accountCreationPage.confirmPrivacyPolicy();
             accountCreationPage.finishAccountCreation();
-            Assert.assertEquals(true, accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
+            Assert.assertTrue(accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
         }
-    }
+}
     @Test(dataProvider = "InvalidUserCredentials", enabled = false)
     public void createAccountWithInvalidData(String firstName,String lastName,String email,String phoneNumber,String password,String confirmPassword){
         logInPageAndLogOut.clickOnAccountPageBtn();
@@ -106,10 +128,6 @@ public class TestAccountCreation {
         Assert.assertTrue(accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
     }
 //endregion
-    @Test (enabled = false)
-    public void clickOnCaptcha(){
-        accountCreationPage.clickOn_Captcha_CheckBox();
-    }
     @AfterMethod
     public void closeWD(){
         webDriver.close();
