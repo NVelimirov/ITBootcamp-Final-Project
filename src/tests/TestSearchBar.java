@@ -38,7 +38,7 @@ public class TestSearchBar {
     @DataProvider(name = "listOfBoardGamesForSearch")
     public Object[][] getListOfBoardGamesForSearch(){
         return new Object[][]{
-                {"Fallout", 4},
+                {"Fallout", 4},//inicijalno je radio perfektno, sad iz nekog razloga nalazi samo 2 od 4
                 {"Dark Souls", 2},
                 {"Waterdeep", 6},
         };

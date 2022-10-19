@@ -1,8 +1,6 @@
 package tests;
 
 
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -16,7 +14,6 @@ import pages.LogInPageAndLogOut;
 import pages.ReadFromExcel;
 import utils.Page_TitlesTextsAndMessages;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -62,7 +59,8 @@ public class TestAccountCreation {
     }
 //endregion
 //region Tests
-    //stara verzija
+    //region altTest
+    //ostavljena inicijalna verzija
 //    @Test (description = "variation of createAccountWithInvalidData, read from xml file")
 //    public void invalidDataAcountCreation() throws IOException {
 //        FileInputStream inputStream = accountCreationPage.getInputStream();
@@ -83,6 +81,7 @@ public class TestAccountCreation {
 //            Assert.assertEquals(true, accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
 //        }
 //    }
+    //endregion
 @Test (description = "variation of createAccountWithInvalidData, read from xml file")
     public void invalidDataAcountCreation(){
         readFromExcel.readFromExcelTable(Page_TitlesTextsAndMessages.EXCEL_TABLE_PATH.getAbsolutePath());

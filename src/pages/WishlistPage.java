@@ -49,6 +49,7 @@ public class WishlistPage {
     }
 
     public void toWishlistPage(){
+        webDriver.navigate().refresh();
         actions.moveToElement(wishlistPageBtn).click().perform();
     }
 

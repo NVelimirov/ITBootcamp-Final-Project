@@ -13,15 +13,10 @@ import java.time.Duration;
 public class TestWishlistPage {
 //region fields
     private WebDriver webDriver;
-
     private Actions actions;
-
     private WishlistPage wishlistPage;
-
     private LogInPageAndLogOut logInPage;
-
     private ConfluxHomePage confluxHomePage;
-
     private BoardGamesPage boardGamesPage;
 
 //endregion
@@ -70,7 +65,6 @@ public class TestWishlistPage {
         Assert.assertEquals(wishlistPage.checkNumberOfWishlistItems(), 2, "Numbers should match");
     }
 
-
     @Test (priority = 4)
     public void RemoveOneItemFromWishlist(){
         wishlistPage.removeOneItemFromWishlist();
@@ -92,7 +86,8 @@ public class TestWishlistPage {
     }
 //region
     @AfterTest
-    public void closeWebDriver(){
+    public void emptyWishlistAndCloseWebDriver(){
+
         webDriver.close();
     }
 }

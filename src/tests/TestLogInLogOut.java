@@ -86,7 +86,7 @@ public class TestLogInLogOut {
 
     @Test
     public void logInWithPoPUpScreen(){
-        logInPage.clickOnAccountPageBtnPopUpLogIn();
+        logInPage.clickOnAccountPageBtnPopUpLogIn();//neki put ga pronadje, a neki ne. Ne znam u cemu je konkretan problem
         logInPage.enterUserEmailPopUp("oralee24lmaritimen.com");
         logInPage.enterUserPasswordPopUp("1234");
         logInPage.clickLogInPopUpBtn();
