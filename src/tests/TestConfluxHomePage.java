@@ -61,6 +61,13 @@ public class TestConfluxHomePage {
         confluxHomePage.changeLanguageToSerbian();
         Assert.assertEquals(confluxHomePage.checkIfLanguageHasChangedToSerbian(), Page_TitlesTextsAndMessages.HOME_PAGE_LANGUAGE_SERBIAN.getAbsolutePath(), "It should say Srpski");
     }
+
+
+    //hocemo da se ovo izvrsi samo posle odredjenih metoda
+    @AfterMethod(dependsOnMethods = {"testInstagramLink", "testFacebookLink"})
+    public void switchTo() {
+        webDriver.switchTo().window(webDriver.getWindowHandle());
+    }
     @Test(dependsOnMethods = "changePageLanguageToSerbian")
     public void revertToEnglish(){
         confluxHomePage.revertLanguageToEnglish();
