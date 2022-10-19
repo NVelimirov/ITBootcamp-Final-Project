@@ -39,8 +39,8 @@ public class TestProductFilters {
         confluxHomePage = new ConfluxHomePage(webDriver, actions);
         productFilters = new ProductFilters(webDriver, actions);
         boardGamesPage = new BoardGamesPage(webDriver, actions);
-        webDriver.get("https://conflux.rs/Board-Games");
         webDriver.manage().window().maximize();
+        webDriver.get("https://conflux.rs/Board-Games");
     }
     @Test
     public void moveSliderToChangePriceAndDisplayedProducts(){
@@ -51,6 +51,12 @@ public class TestProductFilters {
         Assert.assertEquals(productFilters.checkDisplayedItemsPrice(), 12);
         //ako je cena prikazanog proizvoda veca od 13k, povecavamo brojac za 1
         //ako je svim prikazanim proizvodima cena veca od 13k, broj prikazanih i broj izbrojanih bi trebalo da se poklapaju
+    }
+
+    @Test
+    public void checkIfOnlyOutOfStockItemsAreDisplayedAfterCheckingOutOfStockCheckbox(){
+        productFilters.clickOutOfStockCheckbox();
+        Assert.assertEquals(productFilters.checkIfDisplayedItemsAreOutOfStock(), 12);
     }
 
 

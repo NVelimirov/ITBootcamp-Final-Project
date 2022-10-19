@@ -35,6 +35,9 @@ public class ProductFilters {
     @FindBy(css = ".main-products.product-grid")
     private WebElement displayedProductGrid;
 
+    @FindBy(xpath = "//div[contains(@class,'module-item module-item-q panel panel-active')]//label[2]//input[1]")
+    private WebElement checkBox_OutOfStock;
+
     public ProductFilters(WebDriver webDriver, Actions actions){
         this.webDriver = webDriver;
         this.actions = actions;
@@ -72,14 +75,27 @@ public class ProductFilters {
     public int checkDisplayedItemsPrice(){
         List<WebElement> displayedItems = webDriver.findElements(By.cssSelector(".product-layout.has-extra-button"));
         int numberOfDisplayedProducts = 0;
-        for (WebElement dI : displayedItems){
-            String stringCena = dI.findElement(By.xpath("//*[@id=\"content\"]/div/div[2]/div[1]/div/div[2]/div[4]")).getText().substring(0,2);
+        for (WebElement items : displayedItems){
+            String stringCena = items.findElement(By.xpath("//*[@id=\"content\"]/div/div[2]/div[1]/div/div[2]/div[4]")).getText().substring(0,2);
             int cena = Integer.parseInt(stringCena);
             if (cena > 13){//stavljamo 13 jer je cena uneta u fromatu 15,000 sa zarezom
                 numberOfDisplayedProducts++;
             }
         }
         return numberOfDisplayedProducts;
+    }
+
+    public void clickOutOfStockCheckbox(){
+        checkBox_OutOfStock.click();
+    }
+
+    public int checkIfDisplayedItemsAreOutOfStock(){
+        int numberOfDisplayedItems = 0;
+        List<WebElement> displayedItems = webDriver.findElements(By.cssSelector(".product-layout.out-of-stock.has-extra-button"));
+        numberOfDisplayedItems += displayedItems.stream()
+                .filter(item -> item.getAttribute("class").contains("out-of-stock"))
+                .count();
+        return numberOfDisplayedItems;
     }
 
 }
