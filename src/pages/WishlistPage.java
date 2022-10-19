@@ -27,7 +27,7 @@ public class WishlistPage {
     @FindBy(xpath = "//*[@id=\"content\"]/h1")
     private WebElement wishlistTitlePage;
 
-    @FindBy(xpath = "//a[@class='btn btn-wishlist']")
+    @FindBy(css = ".btn.btn-wishlist")
     private WebElement toWishlistButton;
 
     @FindBy(xpath = "//tbody/tr[1]/td[6]/a[1]/i[1]")
