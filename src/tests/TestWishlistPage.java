@@ -90,7 +90,12 @@ public class TestWishlistPage {
 //region
     @AfterTest
     public void emptyWishlistAndCloseWebDriver(){
-
+        webDriver.get("https://conflux.rs/index.php?route=account/login");
+        logInPage.enterUserEmail("oralee24@lmaritimen.com");
+        logInPage.enterUserPassword("1234");
+        logInPage.clickOnLogInBtn();
+        wishlistPage.toWishlistPage();
+        wishlistPage.clearWishlistPage();
         webDriver.close();
     }
 }

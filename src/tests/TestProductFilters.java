@@ -3,6 +3,7 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -44,6 +45,12 @@ public class TestProductFilters {
     @Test
     public void moveSliderToChangePriceAndDisplayedProducts(){
         productFilters.move_From_slider();
+        productFilters.move_To_slider();
+        Assert.assertEquals(productFilters.getMinPrice(), "13074");
+        Assert.assertEquals(productFilters.getMaxPrice(), "32425");
+        Assert.assertEquals(productFilters.checkDisplayedItemsPrice(), 12);
+        //ako je cena prikazanog proizvoda veca od 13k, povecavamo brojac za 1
+        //ako je svim prikazanim proizvodima cena veca od 13k, broj prikazanih i broj izbrojanih bi trebalo da se poklapaju
     }
 
 

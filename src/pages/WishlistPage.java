@@ -87,4 +87,12 @@ public class WishlistPage {
         webDriver.navigate().refresh();
     }
 
+    public void clearWishlistPage(){
+        WebElement table_Wishlist = webDriver.findElement(By.id("account-wishlist"));
+        List<WebElement> itemi = table_Wishlist.findElements(By.tagName("tr"));
+        for (WebElement i : itemi) {
+            actions.moveToElement(removeBtn).click().perform();
+        }
+    }
+
 }
