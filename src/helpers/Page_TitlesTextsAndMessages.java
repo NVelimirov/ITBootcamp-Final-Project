@@ -1,4 +1,4 @@
-package utils;
+package helpers;
 
 public enum Page_TitlesTextsAndMessages {
     LOG_IN_PAGE_TITLE("Account Login"),

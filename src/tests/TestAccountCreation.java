@@ -1,9 +1,7 @@
 package tests;
 
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -12,30 +10,23 @@ import org.testng.annotations.Test;
 import pages.AccountCreationPage;
 import pages.LogInPageAndLogOut;
 import utils.ReadFromExcel;
-import utils.Page_TitlesTextsAndMessages;
+import helpers.Page_TitlesTextsAndMessages;
 
 import java.io.IOException;
-import java.time.Duration;
+import static helpers.URLs.HOME_PAGE;
 
-public class TestAccountCreation {
-    private WebDriver webDriver;
-    private Actions actions;
+public class TestAccountCreation extends BaseTest {
     private AccountCreationPage accountCreationPage;
     private ReadFromExcel readFromExcel;
-
- //region BeforeMethod
     private LogInPageAndLogOut logInPageAndLogOut;
+    //region BeforeMethod
     @BeforeMethod
     public void config() throws IOException {
-        System.setProperty("webdriver.chrome.driver", utils.PropertiesReader.getInstance().getValue("WEBDRIVER.CHROMEDRIVER"));
-        webDriver = new ChromeDriver();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        actions = new Actions(webDriver);
         accountCreationPage = new AccountCreationPage(webDriver, actions);
         logInPageAndLogOut = new LogInPageAndLogOut(webDriver, actions);
         readFromExcel = new ReadFromExcel();
-        webDriver.get("https://conflux.rs/");
         webDriver.manage().window().maximize();
+        webDriver.get(HOME_PAGE);
     }
 //endregion
 //region DataProvider
@@ -87,6 +78,7 @@ public class TestAccountCreation {
         readFromExcel.readFromExcelTable(Page_TitlesTextsAndMessages.EXCEL_TABLE_PATH.getAbsolutePath());
         logInPageAndLogOut.clickOnAccountPageBtn();
         accountCreationPage.continueToRegistration();
+        accountCreationPage.confirmPrivacyPolicy();//mora van for petlje, jer kada je unutar ima tendenciju da ga untickuje...
         for (int i = 0; i< readFromExcel.getRowCount(); i++) {
             accountCreationPage.setInputFirstName(readFromExcel.getData(i, 0));
             accountCreationPage.setInputLastName(readFromExcel.getData(i, 1));
@@ -94,7 +86,6 @@ public class TestAccountCreation {
             accountCreationPage.setInputPhoneNumber(readFromExcel.getData(i, 3));
             accountCreationPage.setInputPassword(readFromExcel.getData(i, 4));
             accountCreationPage.setConfirmPassword(readFromExcel.getData(i, 5));
-            accountCreationPage.confirmPrivacyPolicy();
             accountCreationPage.finishAccountCreation();
             Assert.assertTrue(accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
         }
@@ -123,12 +114,13 @@ public class TestAccountCreation {
         accountCreationPage.setInputPhoneNumber("060060060");
         accountCreationPage.setInputPassword("1234");
         accountCreationPage.setConfirmPassword("1234");
+        accountCreationPage.confirmPrivacyPolicy();
         accountCreationPage.finishAccountCreation();
         Assert.assertTrue(accountCreationPage.getMessage_invalidUserCredentials(), "Message should be displayed");
     }
 //endregion
     @AfterMethod
-    public void closeWD(){
-        webDriver.close();
+    public void pageCleanup() {
+        webDriver.manage().deleteAllCookies();
     }
 }

@@ -7,8 +7,7 @@ import pages.GoogleSearch;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import pages.LogInPageAndLogOut;
-import utils.Page_TitlesTextsAndMessages;
+import helpers.Page_TitlesTextsAndMessages;
 
 
 import java.time.Duration;

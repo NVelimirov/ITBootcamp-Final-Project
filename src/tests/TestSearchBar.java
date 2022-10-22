@@ -6,7 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.ConfluxHomePage;
-import utils.Page_TitlesTextsAndMessages;
+import helpers.Page_TitlesTextsAndMessages;
 import pages.SearchPageConflux;
 
 import java.time.Duration;

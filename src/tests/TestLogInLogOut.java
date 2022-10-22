@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.ConfluxHomePage;
 import pages.LogInPageAndLogOut;
-import utils.Page_TitlesTextsAndMessages;
+import helpers.Page_TitlesTextsAndMessages;
 
 import java.time.Duration;
 
