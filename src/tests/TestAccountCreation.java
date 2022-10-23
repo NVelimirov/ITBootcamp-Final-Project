@@ -73,7 +73,7 @@ public class TestAccountCreation extends BaseTest {
 //        }
 //    }
     //endregion
-@Test (description = "variation of createAccountWithInvalidData, read from xml file")
+@Test (description = "variation of createAccountWithInvalidData, read from xml file")//treba da se razbije na logicke segmente - first name, last, email, etc
     public void invalidDataAcountCreation(){
         readFromExcel.readFromExcelTable(Page_TitlesTextsAndMessages.EXCEL_TABLE_PATH.getAbsolutePath());
         logInPageAndLogOut.clickOnAccountPageBtn();

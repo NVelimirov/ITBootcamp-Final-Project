@@ -1,7 +1,7 @@
 package tests;
 
+import base.BaseTest;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -9,15 +9,12 @@ import pages.ConfluxHomePage;
 import pages.LogInPageAndLogOut;
 import helpers.Page_TitlesTextsAndMessages;
 
-import java.time.Duration;
+
+import static helpers.URLs.HOME_PAGE;
 
 
-public class TestLogInLogOut {
+public class TestLogInLogOut extends BaseTest {
 //region Fields
-    private WebDriver webDriver;
-
-    private Actions actions;
-
     private LogInPageAndLogOut logInPage;
 
     private ConfluxHomePage confluxHomePage;
@@ -26,14 +23,10 @@ public class TestLogInLogOut {
 //region BeforeMethod
     @BeforeMethod
     public void config(){
-        System.setProperty("webdriver.chrome.driver", utils.PropertiesReader.getInstance().getValue("WEBDRIVER.CHROMEDRIVER"));
-        webDriver = new ChromeDriver();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        actions = new Actions(webDriver);
         logInPage = new LogInPageAndLogOut(webDriver, actions);
         confluxHomePage = new ConfluxHomePage(webDriver, actions);
-        webDriver.get("https://conflux.rs/");
         webDriver.manage().window().maximize();
+        webDriver.get(HOME_PAGE);
     }
 //endregion
 //region DataProvider
@@ -94,7 +87,7 @@ public class TestLogInLogOut {
 //endregion
 
     @AfterMethod
-    public void closeWebDriver(){
-        webDriver.close();
+    public void pageCleanup() {
+        webDriver.manage().deleteAllCookies();
     }
 }
